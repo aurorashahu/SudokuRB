@@ -50,24 +50,24 @@ bool backtrack(int (&array)[9][9], int row, int col) // Pass array and current r
     {
         return backtrack(array, row, col + 1); // Recursive call with updated row
     }
-    else // If
+    else // If empty space
     {
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= 9; i++) // loop and check which number 1-9 is valid in the space
         {
-            if (valid_move(array, row, col, i))
+            if (valid_move(array, row, col, i)) // if valid
             {
-                array[row][col] = i;
-                if (backtrack(array, row, col + 1))
+                array[row][col] = i;                // place i there
+                if (backtrack(array, row, col + 1)) // solve the next space in the puzzle
                 {
-                    return true;
+                    return true; // if successful solution return true
                 }
                 else
                 {
-                    array[row][col] = 0;
+                    array[row][col] = 0; // Backtrack, place zero back into the space to try another element
                 }
             }
         }
-        return false;
+        return false; // No solution
     }
 }
 
